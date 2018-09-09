@@ -1,12 +1,19 @@
+import java.io.IOException;
 
 public class Server{
- 
- HttpdConf configuration = new HttpdConf();
- MimeTypes mimeTypes = new MimeTypes();
- ServerSocket socket;
 
- public static void main( String[] args ) throws IOException {
+ static HttpdConf httpdConf;
+ static MimeTypes mimeTypes;
 
+ public static void main( String[] args ) throws IOException{
+  
+  httpdConf = new HttpdConf("conf/httpd.conf");
+  mimeTypes = new MimeTypes("conf/mime.types");
+
+  //httpdConf.printConfig();
+  //mimeTypes.printTypes();
+
+  
 
  }
 
