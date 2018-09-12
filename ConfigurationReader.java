@@ -14,7 +14,6 @@ public class ConfigurationReader{
   file = new File(fileName);
   sc = new Scanner(file);
   String nextLine;
-
  }
 
  public String[] getEntries(){
@@ -22,7 +21,6 @@ public class ConfigurationReader{
   String entries[];
   entries = splitLine(nextLine());
   return entries;
-
  }
 
  public String[] splitLine(String line){

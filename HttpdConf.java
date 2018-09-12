@@ -6,14 +6,14 @@ import java.io.IOException;
 
 public class HttpdConf{
 
- private String serverRoot;
- private int listen;
- private String documentRoot;
- private String logFile;
+ public String serverRoot;
+ public int listen;
+ public String documentRoot;
+ public String logFile;
  HashMap<String,String> alias = new HashMap<>();
  HashMap<String,String> scriptAlias = new HashMap<>();
- private String accessFile = ".htaccess";
- private ArrayList directoryIndex = new ArrayList();
+ public String accessFile = ".htaccess";
+ public ArrayList<String> directoryIndex = new ArrayList<String>();
 
  public HttpdConf(String fileName)throws IOException{
   String entries[];
@@ -24,7 +24,7 @@ public class HttpdConf{
    entries = cf.getEntries();
    addConfiguration(entries);
   }
-  
+
  }
 
  public void addConfiguration(String entries[]){

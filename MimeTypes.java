@@ -39,4 +39,8 @@ public class MimeTypes{
   }
  }
 
+ public String lookUp(String extension){
+ 	return types.get(extension);  
+ }
+
 }
