@@ -1,72 +1,81 @@
 import java.util.HashMap;
-import java.util.Stream;
+import java.util.Map; 
+import java.util.stream.Stream;
+import java.net.*;
+import java.io.*;
 
 public class Request {
-  String uri;
-  String body;
-  String verb;
-  public static final String httpVersion;
-  private static HashMap<String, String> headers;
+  private String uri;
+  private String body;
+  private String verb;
+  private String httpVersion;
+  private HashMap<String, String> headers = new HashMap<>();
+  Boolean endOfRequest = false;
+  BufferedReader reader;
 
-  public Request(String uri, String verb, String httpVersion){
-    this.uri = uri;
-    this.verb = verb;
-    this.headers = new HashMap();
-  }
+ public Request(InputStream stream) throws IOException { 
+  reader = new BufferedReader( new InputStreamReader( stream ));
+  parse();
+ }
 
-  public String request(String test){
+ public void parse() throws IOException{
+  int arg = 0;
+  String line = "";
+  
+  try{
 
-  }
+   while( endOfRequest == false ) {
+    line = getNextLine();
+    String entries[];
 
-  public static void request(Stream client) throws IOException {
-    String line;
+    if(arg == 0){
+     entries = line.split("\\s+");
+     storeFirstLine(entries[0],entries[1],entries[2]);
 
-    BufferedReader reader = new BufferedReader(
-      new InputStreamReader( client.getInputStream() )
-    );
+    }else if(line.equals("") == true){
+     storeBody();
 
-    while( true ) {
-      line = reader.readLine();
-      System.out.println( "> " + line );
-
-      
-      if(line.contains( "END" )){
-        break;
-      }
-      if(line.contains( "GET" )){
-
-      }
-      if(line.contains( "HEAD" )){
-
-      }
-      if(line.contains( "POST" )){
-
-      }
-      if(line.contains( "PUSH" )){
-
-      }
-      if(line.contains( "DELETE" )){
-
-      }
-    }
-    outputLineBreak();
-  }
-
-  public void parse(String methods){
-    switch(methods){
-      case "GET": 
-      break;
-      case "HEAD":
-      break;
-      case"POST":
-      break;
-      case "PUSH":
-      break;
-      case "DELETE":
-      break;
-      default:break;
+    }else{
+     entries = line.split(": ");
+     storeHeaders(entries);
     }
 
+   arg++;
+  }
+
+ }catch (Exception e){
+  badRequest();
+ }
+
+}
+
+  public String getNextLine() throws IOException{
+    return reader.readLine();
+  }
+
+  public void storeBody() throws Exception{
+    String line = getNextLine();
+    if(line.equals("\n")){
+      endOfRequest = true;
+    }else{
+      //readBody
+      endOfRequest = true;
+    }
+
+  }
+
+  public void storeHeaders(String[] entries) throws Exception{
+    headers.put(entries[0],entries[1]);
+  }
+
+  public void badRequest(){
+    System.out.println("Error 400");
+  }
+
+  public void storeFirstLine(String verb, String uri, String httpVersion){
+   this.verb = verb;
+   this.uri = uri;
+   this.httpVersion = httpVersion;
   }
 
   public String getUriString(){
@@ -79,6 +88,13 @@ public class Request {
 
   public String getHttpVersion(){
     return httpVersion;
+  }
+
+  public void printRequest(){
+   System.out.println( "verb " + verb ); 
+   System.out.println( "uri " + uri ); 
+   System.out.println( "httpVersion " + httpVersion );
+   System.out.println(headers);
   }
     
 }

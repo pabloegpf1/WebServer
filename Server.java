@@ -6,6 +6,11 @@ public class Server{
 
  static HttpdConf httpdConf;
  static MimeTypes mimeTypes;
+ static Request request;
+ static ServerSocket socket;
+ static ResponseFactory responseFactory;
+ static Response response;
+
 
  public static void main( String[] args ) throws IOException{
   
@@ -15,30 +20,28 @@ public class Server{
   //httpdConf.printConfig();
   //mimeTypes.printTypes();
 
-  //System.out.println(httpdConf.listen);
-
-   ServerSocket socket = new ServerSocket( httpdConf.listen );
-   Socket client = null;
-
-   while( true ) {
-    client = socket.accept();
-    System.out.println( "Hello" );
-    outputRequest( client );
-    client.close();
-   }
+  start();
 
  }
 
- protected static void outputRequest( Socket client ) throws IOException {
-    String line;
+ public static void start(){
 
-    BufferedReader reader = new BufferedReader(
-      new InputStreamReader( client.getInputStream() )
-    );
-
-    
+  socket = new ServerSocket( httpdConf.listen );
+  Socket client = null;
+ 	
+  while( true ){
+   client = socket.accept();
+   request = createRequest( client );
+   response = responseFactory.getResponse(request,);
+   response.send();
+   client.close();
   }
 
+ }
+
+ protected static void createRequest( Socket client ) throws IOException {
+  request = new Request(client.getInputStream());
+ }
 
 }
 
