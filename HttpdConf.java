@@ -29,24 +29,24 @@ public class HttpdConf{
 
  public void addConfiguration(String entries[]){
   switch (entries[0]) {
-            case "ServerRoot":  serverRoot = entries[1];
-                     break;
-            case "Listen":  listen = Integer.parseInt(entries[1]);
-                     break;
-            case "DocumentRoot":  documentRoot = entries[1];
-                     break;
-            case "LogFile":  logFile = entries[1];
-                     break;
-            case "AccessFile":  accessFile = entries[1];
-                     break;
-            case "Alias":  addAlias(entries);
-                     break;
-            case "ScriptAlias": addScriptAlias(entries);
-                     break;
-            case "DirectoryIndex": addDirectoryIndex(entries);
-                     break;
-            default: break;
-        }
+   case "ServerRoot":  serverRoot = entries[1];
+    break;
+   case "Listen":  listen = Integer.parseInt(entries[1]);
+    break;
+   case "DocumentRoot":  documentRoot = entries[1];
+    break;
+   case "LogFile":  logFile = entries[1];
+    break;
+   case "AccessFile":  accessFile = entries[1];
+    break;
+   case "Alias":  addAlias(entries);
+    break;
+   case "ScriptAlias": addScriptAlias(entries);
+    break;
+   case "DirectoryIndex": addDirectoryIndex(entries);
+    break;
+   default: break;
+  }
  }
 
  public void addAlias(String entries[]){

@@ -20,6 +20,15 @@ public class ConfigurationReader{
 
   String entries[];
   entries = splitLine(nextLine());
+  entries = addSpaces(entries);
+  return entries;
+ }
+
+ public String[] addSpaces(String[] entries){
+  for(int i=0; i<entries.length; i++){
+    entries[i] = entries[i].replaceAll("\\\\"," ");
+  }
+
   return entries;
  }
 

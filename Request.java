@@ -29,7 +29,7 @@ public class Request {
     String entries[];
 
     if(arg == 0){
-     entries = line.split("\\s+");
+     entries = line.split(" ");
      storeFirstLine(entries[0],entries[1],entries[2]);
 
     }else if(line.equals("") == true){
@@ -72,9 +72,9 @@ public class Request {
     System.out.println("Error 400");
   }
 
-  public void storeFirstLine(String verb, String uri, String httpVersion){
+  public void storeFirstLine(String verb, String path, String httpVersion){
    this.verb = verb;
-   this.uri = uri;
+   this.uri = path.replaceAll("\\\\"," ");
    this.httpVersion = httpVersion;
   }
 

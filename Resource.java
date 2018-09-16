@@ -6,7 +6,6 @@ import java.io.File;
 public class Resource{
  String uri;
  HttpdConf httpdConf;
- File file;
 
  public Resource(String uri, HttpdConf httpdConf){
   
@@ -26,8 +25,9 @@ public class Resource{
   	absolutePath = resolvePath();
   }
 
-  if(isDirectory(absolutePath)){
+  if( isFile(absolutePath) == false ){
   	absolutePath = appendDirIndex(absolutePath);
+  	System.out.println("its not a file");
   }
 
   return absolutePath;
@@ -35,9 +35,9 @@ public class Resource{
  }
 
  public String appendDirIndex(String path){
-  String filePath = "DOESNOTEXIST";
+  String filePath = "";
   for(int i=0; i<httpdConf.directoryIndex.size();i++){
-   filePath = httpdConf.directoryIndex.get(i).replace("\"", "") + path;
+   filePath = path + "/" + httpdConf.directoryIndex.get(i).replace("\"", "");
    if(fileExists(filePath) == true){
    	break;
    }
@@ -45,13 +45,13 @@ public class Resource{
   return filePath;
  }
 
- public boolean isDirectory(String path){
-  file = new File(path);
-  return file.isDirectory();
+ public boolean isFile(String path){
+  File file = new File(path);
+  return file.isFile();
  }
 
  public boolean fileExists(String path){
-  file = new File(path);
+  File file = new File(path);
   return file.exists();
  }
 
