@@ -52,19 +52,17 @@ public class HttpdConf{
  public void addAlias(String entries[]){
   alias.put(entries[1],entries[2]);
  }
+
  public void addScriptAlias(String entries[]){
   scriptAlias.put(entries[1],entries[2]);
  }
+
  public void addDirectoryIndex(String entries[]){
 
   for(int i=1; i<entries.length;i++){
    directoryIndex.add(entries[i]);
   }
 
- }
-
- public String getServerRoot(){
- 	return serverRoot;
  }
 
  public void printConfig(){

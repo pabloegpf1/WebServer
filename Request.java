@@ -10,8 +10,8 @@ public class Request {
   private String verb;
   private String httpVersion;
   private HashMap<String, String> headers = new HashMap<>();
-  Boolean endOfRequest = false;
-  BufferedReader reader;
+  private Boolean endOfRequest = false;
+  private BufferedReader reader;
 
  public Request(InputStream stream) throws IOException { 
   reader = new BufferedReader( new InputStreamReader( stream ));

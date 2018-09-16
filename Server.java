@@ -8,8 +8,9 @@ public class Server{
  static MimeTypes mimeTypes;
  static Request request;
  static ServerSocket socket;
- static ResponseFactory responseFactory;
- static Response response;
+ //static ResponseFactory responseFactory;
+ //static Response response;
+ static Resource resource;
 
 
  public static void main( String[] args ) throws IOException{
@@ -17,14 +18,11 @@ public class Server{
   httpdConf = new HttpdConf("conf/httpd.conf");
   mimeTypes = new MimeTypes("conf/mime.types");
 
-  //httpdConf.printConfig();
-  //mimeTypes.printTypes();
-
   start();
 
  }
 
- public static void start(){
+ public static void start()throws IOException{
 
   socket = new ServerSocket( httpdConf.listen );
   Socket client = null;
@@ -32,15 +30,15 @@ public class Server{
   while( true ){
    client = socket.accept();
    request = createRequest( client );
-   response = responseFactory.getResponse(request,);
-   response.send();
+   resource = new Resource(request.getUriString(), httpdConf);
+   System.out.println(resource.absolutePath());
    client.close();
   }
 
  }
 
- protected static void createRequest( Socket client ) throws IOException {
-  request = new Request(client.getInputStream());
+ protected static Request createRequest( Socket client ) throws IOException {
+  return request = new Request(client.getInputStream());
  }
 
 }
