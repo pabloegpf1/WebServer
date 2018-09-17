@@ -8,3 +8,5 @@
 /Request.class
 /Resource.class
 
+/Response.class
+/ResponseFactory.class

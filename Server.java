@@ -8,13 +8,14 @@ public class Server{
  static MimeTypes mimeTypes;
  static Request request;
  static ServerSocket socket;
- //static ResponseFactory responseFactory;
- //static Response response;
+ static ResponseFactory responseFactory;
+ static Response response;
  static Resource resource;
 
 
  public static void main( String[] args ) throws IOException{
   
+  responseFactory = new ResponseFactory();
   httpdConf = new HttpdConf("conf/httpd.conf");
   mimeTypes = new MimeTypes("conf/mime.types");
 
@@ -32,6 +33,7 @@ public class Server{
    request = createRequest( client );
    resource = new Resource(request.getUriString(), httpdConf);
    System.out.println(resource.absolutePath());
+   response = responseFactory.getResponse(request,resource);
    client.close();
   }
 

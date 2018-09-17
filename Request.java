@@ -73,21 +73,28 @@ public class Request {
   }
 
   public void storeFirstLine(String verb, String path, String httpVersion){
+   checkVerb(verb);
    this.verb = verb;
    this.uri = path.replaceAll("\\\\"," ");
    this.httpVersion = httpVersion;
   }
 
   public String getUriString(){
-    return uri;
+   return uri;
   }
 
   public String getVerb(){
-    return verb;
+   return verb;
+  }
+
+  public void checkVerb(String verb){
+   if (verb.matches("GET||HEAD||POST||PUT||DELETE") == false){
+    badRequest();
+   }
   }
 
   public String getHttpVersion(){
-    return httpVersion;
+   return httpVersion;
   }
 
   public void printRequest(){

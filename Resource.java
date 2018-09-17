@@ -4,8 +4,9 @@ import java.io.FileNotFoundException;
 import java.io.File;
 
 public class Resource{
- String uri;
- HttpdConf httpdConf;
+ private String uri;
+ public HttpdConf httpdConf;
+ private Boolean isScript = false;
 
  public Resource(String uri, HttpdConf httpdConf){
   
@@ -20,16 +21,15 @@ public class Resource{
   if(uriAliased()){
   	absolutePath = httpdConf.alias.get(uri).replace("\"", "");
   }else if(uriScriptAliased()){
+    isScript = true;
   	absolutePath = httpdConf.scriptAlias.get(uri).replace("\"", "");
   }else{
   	absolutePath = resolvePath();
   }
 
-  if( isFile(absolutePath) == false ){
+  if( isFile(absolutePath) == false && isScript == false){
   	absolutePath = appendDirIndex(absolutePath);
-  	System.out.println("its not a file");
   }
-
   return absolutePath;
 
  }
@@ -37,7 +37,7 @@ public class Resource{
  public String appendDirIndex(String path){
   String filePath = "";
   for(int i=0; i<httpdConf.directoryIndex.size();i++){
-   filePath = path + "/" + httpdConf.directoryIndex.get(i).replace("\"", "");
+   filePath = path + httpdConf.directoryIndex.get(i).replace("\"", "");
    if(fileExists(filePath) == true){
    	break;
    }
@@ -46,8 +46,13 @@ public class Resource{
  }
 
  public boolean isFile(String path){
-  File file = new File(path);
-  return file.isFile();
+  String lastChar = path.substring(path.length() - 1); 
+  if( lastChar.equals("/") ){
+    return false;
+  }else{
+    return true;
+  }
+  
  }
 
  public boolean fileExists(String path){
@@ -56,7 +61,7 @@ public class Resource{
  }
 
  public boolean isScript(){
-  return true;
+  return isScript;
  }
 
  public boolean isProtected(){
