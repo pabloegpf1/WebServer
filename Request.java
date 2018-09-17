@@ -1,6 +1,8 @@
 import java.util.HashMap;
 import java.util.Map; 
 import java.util.stream.Stream;
+import java.util.ArrayList;
+import java.util.List;
 import java.net.*;
 import java.io.*;
 
@@ -12,6 +14,7 @@ public class Request {
   private HashMap<String, String> headers = new HashMap<>();
   private Boolean endOfRequest = false;
   private BufferedReader reader;
+  private List<String> bodyList = new ArrayList<String>();
 
  public Request(InputStream stream) throws IOException { 
   reader = new BufferedReader( new InputStreamReader( stream ));
@@ -38,6 +41,7 @@ public class Request {
     }else{
      entries = line.split(": ");
      storeHeaders(entries);
+
     }
 
    arg++;
@@ -53,19 +57,27 @@ public class Request {
     return reader.readLine();
   }
 
-  public void storeBody() throws Exception{
-    String line = getNextLine();
-    if(line.equals("\n")){
-      endOfRequest = true;
-    }else{
-      //readBody
-      endOfRequest = true;
-    }
+ public void storeBody() throws Exception{
+  String line = getNextLine();
+  if(line.equals("\n")){
+   endOfRequest = true;
+  }else{ 
 
+   while(line.equals("") == false){
+    bodyList.add(line);
+    line = getNextLine();
+   }
+
+   endOfRequest = true;
+  }
+ }
+
+  public String getHeaderContent(String key) throws Exception{
+   return headers.get(key);
   }
 
   public void storeHeaders(String[] entries) throws Exception{
-    headers.put(entries[0],entries[1]);
+   headers.put(entries[0],entries[1]);
   }
 
   public void badRequest(){
@@ -73,7 +85,6 @@ public class Request {
   }
 
   public void storeFirstLine(String verb, String path, String httpVersion){
-   checkVerb(verb);
    this.verb = verb;
    this.uri = path.replaceAll("\\\\"," ");
    this.httpVersion = httpVersion;
@@ -85,12 +96,6 @@ public class Request {
 
   public String getVerb(){
    return verb;
-  }
-
-  public void checkVerb(String verb){
-   if (verb.matches("GET||HEAD||POST||PUT||DELETE") == false){
-    badRequest();
-   }
   }
 
   public String getHttpVersion(){

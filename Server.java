@@ -32,7 +32,6 @@ public class Server{
    client = socket.accept();
    request = createRequest( client );
    resource = new Resource(request.getUriString(), httpdConf);
-   System.out.println(resource.absolutePath());
    response = responseFactory.getResponse(request,resource);
    client.close();
   }
