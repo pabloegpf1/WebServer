@@ -1,0 +1,3 @@
+IP - userID [00:02:15.227] "HEAD /ab/ 1" 200 166IP - userID [00:08:00.512] "HEAD /ab/ 1" 200 166IP - userID [00:08:16.488] "HEAD /ab/ 1" 200 166IP - userID [00:11:29.552] "HEAD /ab/ 1" 200 166
+IP - userID [00:14:18.974] "HEAD /public_html 1" 200 3147
+IP - userID [00:15:10.886] "HEAD ASDADEDEQWD 1" 404
