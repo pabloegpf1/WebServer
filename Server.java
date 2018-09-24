@@ -13,7 +13,6 @@ public class Server{
  static Resource resource;
  static int NUM_THREADS = 3;
 
-
  public static void main( String[] args ) throws IOException,Exception{
   try{
     responseFactory = new ResponseFactory();
@@ -23,8 +22,8 @@ public class Server{
 
   }catch(Exception ServerException){
     startWith500();
+    ServerException.printStackTrace();
   }
-
  }
 
  public static void start()throws IOException, Exception{
@@ -39,7 +38,7 @@ public class Server{
     response = new Response(400,"Bad Request");
    }
    request.logRequest(httpdConf.logFile,response.code,response.size,client.getRemoteSocketAddress().toString());
-   response.send(client.getOutputStream());
+   response.send(client.getOutputStream(),response.isScript);
    client.close();
   }
  }
@@ -49,16 +48,9 @@ public class Server{
   while( true ){
    Socket client = socket.accept();
    response = new Response(500,"Internal Server Error");
-   response.send(client.getOutputStream());
+   response.send(client.getOutputStream(),false);
+   client.close();
   }
  }
 
 }
-
-
-
-/*  while(true){
-   Socket client = socket.accept();
-   Worker worker = new Worker(httpdConf,mimeTypes,client);
-   worker.start();
-  }*/

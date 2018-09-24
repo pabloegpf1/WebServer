@@ -11,7 +11,6 @@ import java.io.BufferedWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-
 public class Request {
   private String uri;
   private char[] body;
@@ -30,11 +29,9 @@ public class Request {
  public void parse() throws IOException{
   int arg = 0;
   String line = "";
-  
    while( endOfRequest == false ) {
     line = getNextLine();
     String entries[];
-
    if(arg == 0){
      entries = line.split(" ");
      storeFirstLine(entries[0],entries[1],entries[2]);
@@ -44,20 +41,17 @@ public class Request {
      entries = line.split(": ",2);
      storeHeaders(entries);
    }
-
    arg++;
  }
-
 }
 
-  public String getNextLine() throws IOException{
-    return reader.readLine();
-  }
+ public String getNextLine() throws IOException{
+  return reader.readLine();
+ }
 
  public void storeBody() throws IOException{
   String line = getNextLine();
-
-  if(line.equals(null)){
+  if(line.equals("")){
     endOfRequest = true;
   }else if(getHeaderContent("Content-Length") == null){
    endOfRequest = true;

@@ -21,6 +21,7 @@ public class Response{
  public HashMap<String, String> headers = new HashMap<>();
  public String body;
  public int size = 0;
+ public boolean isScript;
 
  private static String HTTP_VERSION = "HTTP/1.1";
  private static String SERVER = "Apache/2.4.1 (Unix)";
@@ -34,7 +35,7 @@ public class Response{
   this.reasonPhrase = reasonPhrase;
  }
 
-public void send(OutputStream client){
+public void send(OutputStream client, boolean isScript){
  PrintWriter out = new PrintWriter( client, true );
  out.println(HTTP_VERSION+" " + code + " " +reasonPhrase);
 
@@ -47,7 +48,9 @@ public void send(OutputStream client){
   out.println(pair.getKey() + ": " + pair.getValue());
   iterator.remove();
  }
- out.println("");
+ if(isScript == false){
+   out.println("");
+ }
 
  if(body != null){
   out.println(body);

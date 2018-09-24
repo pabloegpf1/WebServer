@@ -6,11 +6,16 @@ import java.io.File;
 public class Resource{
  private String uri;
  public HttpdConf httpdConf;
- private Boolean isScript = false;
+ public Boolean isScript;
 
  public Resource(String uri, HttpdConf httpdConf){
   this.uri = uri;
   this.httpdConf = httpdConf;
+  if(uriScriptAliased()){
+    isScript = true;
+  }else{
+    isScript = false;
+  }
  }
 
  public String absolutePath(){
@@ -18,7 +23,7 @@ public class Resource{
 
   if(uriAliased()){
   	absolutePath = httpdConf.alias.get(uri);
-  }else if(uriScriptAliased()){
+  }else if(isScript == true){
   	absolutePath = httpdConf.scriptAlias.get(uri);
   }else{
   	absolutePath = resolvePath();

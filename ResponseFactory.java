@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 
 public class ResponseFactory {
  Response response;
@@ -16,15 +17,15 @@ public class ResponseFactory {
   this.request = request;
   this.mimetypes = mimetypes;
 
-  if( (fileExists(resource.absolutePath())) == false && (request.getVerb().equals("PUT")) == false ){
+  if(resource.isScript() == true){
+   executeScript(resource);
+  }else if( (fileExists(resource.absolutePath())) == false && (request.getVerb().equals("PUT")) == false ){
    fileNotFound();
-  }else if(resource.isScript() == true){
-  	executeScript(resource);
   }else{
-  	identifyVerb(request.getVerb(),resource);
+   identifyVerb(request.getVerb(),resource);
   }
-
   return response;
+
  }
 
  public Boolean fileExists(String path){
@@ -41,7 +42,7 @@ public class ResponseFactory {
     break;
    case "POST":  sendFileContents(resource.absolutePath(),true);
     break;
-   case "GET":  checkLastModified(resource.absolutePath())/*sendFileContents(resource.absolutePath(),true)*/;
+   case "GET":  checkLastModified(resource.absolutePath());
     break;
    case "HEAD":  sendFileContents(resource.absolutePath(),false);
     break;
@@ -115,10 +116,12 @@ public class ResponseFactory {
  }
 
  public void getContentType(String path){
+  File file = new File(path);
+  String name = file.getName();
   String extension = "";
-  int i = path.lastIndexOf('.');
+  int i = name.lastIndexOf('.');
   if (i > 0) {
-   extension = path.substring(i+1, path.length() - 1);
+   extension = name.substring(i+1);
    System.out.println(extension);
   }
   response.headers.put("Content-Type", mimetypes.lookUp(extension));
@@ -144,8 +147,23 @@ public class ResponseFactory {
   response.reasonPhrase = "Not Modified";
  }
 
- public void executeScript(Resource resource){
-  System.out.println("Execute script" + resource.absolutePath());
+ public void executeScript(Resource resource) throws IOException {
+   response.code = 200;
+   response.reasonPhrase = "OK";
+   ProcessBuilder build = new ProcessBuilder(resource.absolutePath());
+   Process process = build.start();
+   BufferedReader stdInput = new BufferedReader(new InputStreamReader(process.getInputStream()));
+   StringBuilder stringBuilder = new StringBuilder();
+   String line = null;
+   while ((line = stdInput.readLine()) != null){
+    stringBuilder.append(line);
+  }
+  response.body = stringBuilder.toString();
+  Map<String, String> env = build.environment();
+  env.put("SERVER_PROTOCOL", "HTTP/1.1");
+  env.put("QUERY_STRING", resource.absolutePath());
+
+  response.isScript = true;
  }
 
 }
