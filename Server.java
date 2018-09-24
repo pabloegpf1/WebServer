@@ -11,36 +11,54 @@ public class Server{
  static ResponseFactory responseFactory;
  static Response response;
  static Resource resource;
+ static int NUM_THREADS = 3;
 
 
- public static void main( String[] args ) throws IOException{
-  
-  responseFactory = new ResponseFactory();
-  httpdConf = new HttpdConf("conf/httpd.conf");
-  mimeTypes = new MimeTypes("conf/mime.types");
+ public static void main( String[] args ) throws IOException,Exception{
+  try{
+    responseFactory = new ResponseFactory();
+    httpdConf = new HttpdConf("conf/httpd.conf");
+    mimeTypes = new MimeTypes("conf/mime.types");
+    start();
 
-  start();
-
- }
-
- public static void start()throws IOException{
-
-  socket = new ServerSocket( httpdConf.listen );
-  Socket client = null;
- 	
-  while( true ){
-   client = socket.accept();
-   request = createRequest( client );
-   resource = new Resource(request.getUriString(), httpdConf);
-   response = responseFactory.getResponse(request,resource);
-   client.close();
+  }catch(Exception ServerException){
+    startWith500();
   }
 
  }
 
- protected static Request createRequest( Socket client ) throws IOException {
-  return request = new Request(client.getInputStream());
+ public static void start()throws IOException, Exception{
+  socket = new ServerSocket( httpdConf.listen );
+  while( true ){
+   Socket client = socket.accept();
+   request = new Request(client.getInputStream());
+   resource = new Resource(request.getUriString(), httpdConf);
+   try{
+    response = responseFactory.getResponse(request,resource,mimeTypes);
+   }catch(Exception e){
+    response = new Response(400,"Bad Request");
+   }
+   request.logRequest(httpdConf.logFile,response.code,response.size,client.getRemoteSocketAddress().toString());
+   response.send(client.getOutputStream());
+   client.close();
+  }
+ }
+
+ public static void startWith500()throws IOException{
+  socket = new ServerSocket( httpdConf.listen );
+  while( true ){
+   Socket client = socket.accept();
+   response = new Response(500,"Internal Server Error");
+   response.send(client.getOutputStream());
+  }
  }
 
 }
 
+
+
+/*  while(true){
+   Socket client = socket.accept();
+   Worker worker = new Worker(httpdConf,mimeTypes,client);
+   worker.start();
+  }*/

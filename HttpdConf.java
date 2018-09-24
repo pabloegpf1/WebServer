@@ -1,5 +1,5 @@
-import java.util.HashMap; 
-import java.util.Map; 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ArrayList;
 import java.io.IOException;
 
@@ -7,12 +7,12 @@ import java.io.IOException;
 public class HttpdConf{
 
  public String serverRoot;
- public int listen;
+ public int listen = 8080;
  public String documentRoot;
  public String logFile;
  HashMap<String,String> alias = new HashMap<>();
  HashMap<String,String> scriptAlias = new HashMap<>();
- public String accessFile = ".htaccess";
+ public String AccessFileName = ".htaccess";
  public ArrayList<String> directoryIndex = new ArrayList<String>();
 
  public HttpdConf(String fileName)throws IOException{
@@ -37,7 +37,7 @@ public class HttpdConf{
     break;
    case "LogFile":  logFile = entries[1];
     break;
-   case "AccessFile":  accessFile = entries[1];
+   case "AccessFileName":  AccessFileName = entries[1];
     break;
    case "Alias":  addAlias(entries);
     break;
@@ -70,12 +70,12 @@ public class HttpdConf{
   System.out.println(listen);
   System.out.println(documentRoot);
   System.out.println(logFile);
-  System.out.println(accessFile);
+  System.out.println(AccessFileName);
   System.out.println(alias);
   System.out.println(scriptAlias);
    for (int i = 0; i < directoryIndex.size(); i++) {
      System.out.println(directoryIndex.get(i));
-    } 
+    }
  }
 
 }

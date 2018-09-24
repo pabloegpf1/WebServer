@@ -1,5 +1,5 @@
-import java.util.HashMap; 
-import java.util.Map; 
+import java.util.HashMap;
+import java.util.Map;
 import java.io.IOException;
 
 public class MimeTypes{
@@ -15,7 +15,7 @@ public class MimeTypes{
    entries = cf.getEntries();
    addType(entries);
   }
-  
+
  }
 
  public void addType(String entries[]){
@@ -40,7 +40,11 @@ public class MimeTypes{
  }
 
  public String lookUp(String extension){
- 	return types.get(extension);  
+ 	String type = types.get(extension);
+  if(type == null){
+    type = "text/text";
+  }
+  return type;
  }
 
 }

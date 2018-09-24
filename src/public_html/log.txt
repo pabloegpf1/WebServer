@@ -1,3 +1,83 @@
-IP - userID [00:02:15.227] "HEAD /ab/ 1" 200 166IP - userID [00:08:00.512] "HEAD /ab/ 1" 200 166IP - userID [00:08:16.488] "HEAD /ab/ 1" 200 166IP - userID [00:11:29.552] "HEAD /ab/ 1" 200 166
 IP - userID [00:14:18.974] "HEAD /public_html 1" 200 3147
 IP - userID [00:15:10.886] "HEAD ASDADEDEQWD 1" 404
+IP - userID [10:54:03.490] "PUT /public_html/hello.html 1" 201
+IP - userID [10:54:17.356] "DELETE /public_html/hello.html 1" 204
+IP - userID [10:57:07.686] "PUT /public_html/hello.txt 1" 201
+IP - userID [11:02:41.740] "DELETE /public_html/hello.txt 1" 204
+IP - userID [11:03:28.487] "POST /public_html/index.html 1" 200 3147
+IP - userID [11:05:01.882] "GET /public_html/index.html HTTP/1.1" 304
+IP - userID [11:16:19.435] "GET /public_html/index.html HTTP/1.1" 200 3147
+IP - userID [11:16:19.640] "GET /js/image-test.js HTTP/1.1" 404
+IP - userID [11:45:36.290] "GET /public_html/index.html HTTP/1.1" 200 0
+IP - userID [11:45:37.205] "GET /favicon.ico HTTP/1.1" 404
+IP - userID [11:46:25.304] "GET /public_html/images/sushi.jpg HTTP/1.1" 200 0
+IP - userID [11:46:33.942] "GET /public_html/images/sushi.jpg HTTP/1.1" 200 0
+IP - userID [11:47:56.321] "GET /public_html/index.html HTTP/1.1" 304
+IP - userID [11:48:43.489] "GET /public_html/index.html HTTP/1.1" 200 3147
+IP - userID [11:48:43.626] "GET /js/image-test.js HTTP/1.1" 404
+IP - userID [11:52:16.541] "GET /public_html/index.html HTTP/1.1" 200 3147
+IP - userID [11:52:16.688] "GET /js/image-test.js HTTP/1.1" 404
+IP - userID [14:23:34.511] "PUT /public_html/hello/hi.txt 1" 201-
+IP - userID [14:24:01.020] "DELETE /public_html/hello 1" 404-
+IP - userID [14:24:12.281] "DELETE /public_html/hello/ 1" 404-
+IP - userID [14:35:20.249] "GET /public_html/index.html HTTP/1.1" 200 3157
+IP - userID [14:35:20.324] "GET /js/image-test.js HTTP/1.1" 404-
+IP - userID [14:35:28.189] "GET /public_html/index.html HTTP/1.1" 200 3157
+IP - userID [14:35:28.456] "GET /js/image-test.js HTTP/1.1" 404-
+IP - userID [14:57:15.656] "GET /public_html/index.html HTTP/1.1" 200 3157
+IP - userID [14:57:15.816] "GET /js/image-test.js HTTP/1.1" 404-
+IP - userID [14:57:43.133] "GET /public_html/index.html HTTP/1.1" 200 3157
+IP - userID [14:57:43.221] "GET /js/image-test.js HTTP/1.1" 404-
+IP - userID [14:58:57.303] "GET /public_html/index.html HTTP/1.1" 200 3157
+IP - userID [14:58:57.403] "GET /js/image-test.js HTTP/1.1" 404-
+IP - userID [10:15:20.127] "GET /public_html/index.html HTTP/1.1" 200 3157
+IP - userID [10:27:33.426] "GET /public_html/index.html HTML/1.1" 304-
+IP - userID [10:28:05.501] "GET /public_html/index.html HTML/1.1" 304-
+IP - userID [10:29:22.885] "GET /public_html/index.html HTML/1.1" 304-
+IP - userID [10:34:20.105] "GET /public_html/index.html HTML/1.1" 304-
+IP - userID [10:35:49.226] "GET /public_html/index.html HTML/1.1" 200 3157
+IP - userID [10:36:55.631] "GET /public_html/index.html HTML/1.1" 304-
+IP - userID [10:37:59.229] "get edwqde qew" 404-
+IP - userID [10:38:23.951] "GET /public_html/index.html HTML/1.1" 304-
+IP - userID [10:38:35.628] "GET /public_html/index.html HTML/1.1" 304-
+IP - userID [10:39:49.447] "GET /public_html/index.html HTML/1.1" 304-
+IP - userID [10:43:41.842] "GET /public_html/index.html HTML/1.1" 304-
+IP - userID [10:44:04] "GET /public_html/index.html HTML/1.1" 304-
+IP - userID [10:44:42.567] "GET /public_html/index.html HTML/1.1" 304-
+/0:0:0:0:0:0:0:1:56055 - userID [10:59:01.171] "GET /public_html/index.html HTML/1.1" 304-
+/0:0:0:0:0:0:0:1:56100 - [11:01:43.775] "GET /public_html/index.html HTML/1.1" 304-
+/0:0:0:0:0:0:0:1:56263 - [java.text.SimpleDateFormat@f17b4ca5] "GET /public_html/index.html HTML/1.1" 304 -
+/0:0:0:0:0:0:0:1:56353 - [2018-09-23 11:16:21.278] "GET /public_html/index.html HTML/1.1" 304 -
+/0:0:0:0:0:0:0:1:56381 - [Sun, 23 Sep 2018 11:17:31 PDT] "çGET /public_html/index.html HTML/1.1" 400 -
+/0:0:0:0:0:0:0:1:56395 - [Sun, 23 Sep 2018 11:17:58 PDT] "GET /public_html/index.html HTML/1.1" 304 -
+/0:0:0:0:0:0:0:1:56556 - [Sun, 23 Sep 2018 11:27:35 PDT] "GET /public_html/index.html HTML/1.1" 304 -
+/0:0:0:0:0:0:0:1:56615 - [Sun, 23 Sep 2018 11:31:13 PDT] "GET /public_html/index.html HTML/1.1" 200 3157
+/0:0:0:0:0:0:0:1:56639 - [Sun, 23 Sep 2018 11:32:58 PDT] "PUT /public_html/hello.txt 1" 201 -
+/0:0:0:0:0:0:0:1:56674 - [Sun, 23 Sep 2018 11:35:21 PDT] "POST /public_html/index.html/ 1" 200 3157
+/0:0:0:0:0:0:0:1:56828 - [Sun, 23 Sep 2018 11:46:21 PDT] "POST /public_html/index.html/ 1" 200 3157
+/0:0:0:0:0:0:0:1:56843 - [Sun, 23 Sep 2018 11:47:54 PDT] "DELETE /public_html/hello.txt 1" 204 -
+/0:0:0:0:0:0:0:1:56860 - [Sun, 23 Sep 2018 11:48:36 PDT] "DELETE /public_html/hello.txt 1" 404 -
+/0:0:0:0:0:0:0:1:56877 - [Sun, 23 Sep 2018 11:49:03 PDT] "HEAD /public_html/hello.txt 1" 404 -
+/0:0:0:0:0:0:0:1:57035 - [Sun, 23 Sep 2018 11:58:31 PDT] "POST /public_html/index.html/ 1" 200 3157
+/0:0:0:0:0:0:0:1:57130 - [Sun, 23 Sep 2018 12:01:17 PDT] "POST /public_html/index.html/ 1" 200 3157
+/0:0:0:0:0:0:0:1:57203 - [Sun, 23 Sep 2018 12:06:17 PDT] "POST /public_html/ 1" 200 3157
+/0:0:0:0:0:0:0:1:57565 - [Sun, 23 Sep 2018 12:38:11 PDT] "HEAD /ab/ 1" 200 166
+/0:0:0:0:0:0:0:1:58339 - [Sun, 23 Sep 2018 13:18:04 PDT] "HEAD ADDADSA 1" 404 -
+/0:0:0:0:0:0:0:1:58369 - [Sun, 23 Sep 2018 13:18:11 PDT] "sad asdasd asdad" 404 -
+/0:0:0:0:0:0:0:1:59078 - [Sun, 23 Sep 2018 13:49:59 PDT] "HEAD ADDADSA 1" 404 -
+/0:0:0:0:0:0:0:1:49459 - [Sun, 23 Sep 2018 17:12:10 PDT] "HEAD ADDADSA 1" 404 -
+/0:0:0:0:0:0:0:1:49494 - [Sun, 23 Sep 2018 17:15:48 PDT] "HEAD asda qwe" 404 -
+/0:0:0:0:0:0:0:1:49525 - [Sun, 23 Sep 2018 17:17:43 PDT] "head ewe rewrew" 404 -
+/0:0:0:0:0:0:0:1:49541 - [Sun, 23 Sep 2018 17:18:28 PDT] "asdas dsad adsd" 404 -
+/0:0:0:0:0:0:0:1:50150 - [Sun, 23 Sep 2018 17:41:09 PDT] "awd asdas asdasd" 404 -
+/0:0:0:0:0:0:0:1:50157 - [Sun, 23 Sep 2018 17:41:34 PDT] "HEAD /public_html/ 1" 200 3157
+/0:0:0:0:0:0:0:1:50173 - [Sun, 23 Sep 2018 17:42:56 PDT] "asd adsda adsasd" 404 -
+/0:0:0:0:0:0:0:1:50187 - [Sun, 23 Sep 2018 17:44:07 PDT] "null null null" 400 -
+/0:0:0:0:0:0:0:1:50191 - [Sun, 23 Sep 2018 17:44:12 PDT] "null null null" 400 -
+/0:0:0:0:0:0:0:1:50205 - [Sun, 23 Sep 2018 17:44:49 PDT] "HEAD /public_html/ 1" 200 3157
+/0:0:0:0:0:0:0:1:50209 - [Sun, 23 Sep 2018 17:44:56 PDT] "null null null" 400 -
+/0:0:0:0:0:0:0:1:50213 - [Sun, 23 Sep 2018 17:46:12 PDT] "null null null" 400 -
+/0:0:0:0:0:0:0:1:50227 - [Sun, 23 Sep 2018 17:47:20 PDT] "null null null" 400 -
+/0:0:0:0:0:0:0:1:50239 - [Sun, 23 Sep 2018 17:47:54 PDT] "null null null" 400 -
+/0:0:0:0:0:0:0:1:50448 - [Sun, 23 Sep 2018 18:05:23 PDT] "HEAD /public_html/ 1" 200 3157
+/0:0:0:0:0:0:0:1:50616 - [Sun, 23 Sep 2018 18:43:29 PDT] "HEAD /public_html/ 1" 200 3157

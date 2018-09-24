@@ -1,4 +1,4 @@
-AuthUserFile "/Users/jrob/workspace/server/.htpasswd"
+AuthUserFile "/Users/pablo/Documents/SFSU/Internet App design & development/Web Server/WebServer/web-server-liyao-and-pablo/src/.htpasswd"
 AuthType Basic
 AuthName "I Challenge You"
 Require valid-user
