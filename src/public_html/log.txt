@@ -123,3 +123,6 @@ IP - userID [10:44:42.567] "GET /public_html/index.html HTML/1.1" 304-
 /0:0:0:0:0:0:0:1:57574 - [Mon, 24 Sep 2018 22:46:53 PDT] "GET /sdwefr/ 12" 404 -
 /0:0:0:0:0:0:0:1:57581 - [Mon, 24 Sep 2018 22:47:33 PDT] "aaa asda asd" 404 -
 /0:0:0:0:0:0:0:1:57586 - [Mon, 24 Sep 2018 22:47:46 PDT] "asdad /public_html/ 1" 400 -
+/0:0:0:0:0:0:0:1:57847 - [Mon, 24 Sep 2018 23:04:51 PDT] "HEAD /public_html/ q" 200 3157
+/0:0:0:0:0:0:0:1:57894 - [Mon, 24 Sep 2018 23:07:56 PDT] "HEAD /cgi-bin/ q" 200 0
+/0:0:0:0:0:0:0:1:57899 - [Mon, 24 Sep 2018 23:08:10 PDT] "HEAD /public_html/ 1" 200 3157

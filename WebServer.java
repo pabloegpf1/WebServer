@@ -2,7 +2,7 @@ import java.io.IOException;
 import java.net.*;
 import java.io.*;
 
-public class Server{
+public class WebServer{
 
  static HttpdConf httpdConf;
  static MimeTypes mimeTypes;
