@@ -11,7 +11,6 @@ public class Server{
  static ResponseFactory responseFactory;
  static Response response;
  static Resource resource;
- static int NUM_THREADS = 3;
 
  public static void main( String[] args ) throws IOException,Exception{
   try{

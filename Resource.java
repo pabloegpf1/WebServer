@@ -12,25 +12,23 @@ public class Resource{
   this.uri = uri;
   this.httpdConf = httpdConf;
   if(uriScriptAliased()){
-    isScript = true;
+   isScript = true;
   }else{
-    isScript = false;
+   isScript = false;
   }
  }
 
  public String absolutePath(){
   String absolutePath;
-
   if(uriAliased()){
-  	absolutePath = httpdConf.alias.get(uri);
+   absolutePath = httpdConf.alias.get(uri);
   }else if(isScript == true){
-  	absolutePath = httpdConf.scriptAlias.get(uri);
+   absolutePath = httpdConf.scriptAlias.get(uri);
   }else{
-  	absolutePath = resolvePath();
+   absolutePath = resolvePath();
   }
-
   if( isFile(absolutePath) == false && fileExists(absolutePath) == true ){
-  	absolutePath = appendDirIndex(absolutePath);
+   absolutePath = appendDirIndex(absolutePath);
   }
   return absolutePath;
  }
@@ -47,8 +45,8 @@ public class Resource{
  }
 
  public boolean isFile(String path){
-   File file = new File(path);
-   return file.isFile();
+  File file = new File(path);
+  return file.isFile();
  }
 
  public boolean fileExists(String path){
@@ -71,18 +69,18 @@ public class Resource{
  public boolean uriAliased(){
   String alias = httpdConf.alias.get(uri);
   if(alias == null){
-  	return false;
+   return false;
   }else{
-  	return true;
+   return true;
   }
  }
 
  public boolean uriScriptAliased(){
   String alias = httpdConf.scriptAlias.get(uri);
   if(alias == null){
-  	return false;
+   return false;
   }else{
-  	return true;
+   return true;
   }
  }
 

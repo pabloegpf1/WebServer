@@ -38,7 +38,6 @@ public class Response{
 public void send(OutputStream client, boolean isScript){
  PrintWriter out = new PrintWriter( client, true );
  out.println(HTTP_VERSION+" " + code + " " +reasonPhrase);
-
  headers.put("Date",getServerTime());
  headers.put("Server",SERVER);
 
@@ -49,16 +48,14 @@ public void send(OutputStream client, boolean isScript){
   iterator.remove();
  }
  if(isScript == false){
-   out.println("");
+  out.println("");
  }
-
  if(body != null){
   out.println(body);
  }
 }
 
-
-public String getServerTime() {
+ public String getServerTime() {
   Calendar calendar = Calendar.getInstance();
   SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z", Locale.US);
   dateFormat.setTimeZone(TimeZone.getTimeZone("PDT"));

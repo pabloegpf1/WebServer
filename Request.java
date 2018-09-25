@@ -12,13 +12,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Request {
-  private String uri;
-  private char[] body;
-  private String verb;
-  private String httpVersion;
-  private HashMap<String, String> headers = new HashMap<>();
-  private Boolean endOfRequest = false;
-  private BufferedReader reader;
+ private String uri;
+ private char[] body;
+ private String verb;
+ private String httpVersion;
+ private HashMap<String, String> headers = new HashMap<>();
+ private Boolean endOfRequest = false;
+ private BufferedReader reader;
 
  public Request(InputStream stream) throws IOException {
   InputStreamReader inputStream = new InputStreamReader( stream );
@@ -29,21 +29,21 @@ public class Request {
  public void parse() throws IOException{
   int arg = 0;
   String line = "";
-   while( endOfRequest == false ) {
-    line = getNextLine();
-    String entries[];
+  while( endOfRequest == false ) {
+   line = getNextLine();
+   String entries[];
    if(arg == 0){
-     entries = line.split(" ");
-     storeFirstLine(entries[0],entries[1],entries[2]);
+    entries = line.split(" ");
+    storeFirstLine(entries[0],entries[1],entries[2]);
    }else if(line.equals("") == true){
-     storeBody();
+    storeBody();
    }else{
-     entries = line.split(": ",2);
-     storeHeaders(entries);
+    entries = line.split(": ",2);
+    storeHeaders(entries);
    }
-   arg++;
+  arg++;
+  }
  }
-}
 
  public String getNextLine() throws IOException{
   return reader.readLine();
@@ -52,7 +52,7 @@ public class Request {
  public void storeBody() throws IOException{
   String line = getNextLine();
   if(line.equals("")){
-    endOfRequest = true;
+   endOfRequest = true;
   }else if(getHeaderContent("Content-Length") == null){
    endOfRequest = true;
  }else{
@@ -63,41 +63,41 @@ public class Request {
   }
  }
 
-  public String getHeaderContent(String key) throws IOException{
-   return headers.get(key);
+ public String getHeaderContent(String key) throws IOException{
+  return headers.get(key);
+ }
+
+ public void storeHeaders(String[] entries) throws IOException{
+  headers.put(entries[0],entries[1]);
+ }
+
+ public void storeFirstLine(String verb, String path, String httpVersion){
+  this.verb = verb;
+  this.uri = path.replaceAll("\\\\"," ");
+  this.httpVersion = httpVersion;
+ }
+
+ public String getUriString(){
+  return uri;
+ }
+
+ public String getVerb(){
+  return verb;
+ }
+
+ public String getHttpVersion(){
+  return httpVersion;
+ }
+
+ public void printRequest(){
+  System.out.println( "verb " + verb );
+  System.out.println( "uri " + uri );
+  System.out.println( "httpVersion " + httpVersion );
+  System.out.println(headers);
   }
 
-  public void storeHeaders(String[] entries) throws IOException{
-   headers.put(entries[0],entries[1]);
-  }
-
-  public void storeFirstLine(String verb, String path, String httpVersion){
-   this.verb = verb;
-   this.uri = path.replaceAll("\\\\"," ");
-   this.httpVersion = httpVersion;
-  }
-
-  public String getUriString(){
-   return uri;
-  }
-
-  public String getVerb(){
-   return verb;
-  }
-
-  public String getHttpVersion(){
-   return httpVersion;
-  }
-
-  public void printRequest(){
-   System.out.println( "verb " + verb );
-   System.out.println( "uri " + uri );
-   System.out.println( "httpVersion " + httpVersion );
-   System.out.println(headers);
-  }
-
-  public void logRequest(String path, int code, int size,String ip){
-   try{
+ public void logRequest(String path, int code, int size,String ip){
+  try{
     SimpleDateFormat sdf = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz");
     String currDate = sdf.format(new Date());
     BufferedWriter writer = new BufferedWriter( new FileWriter(path, true ));
@@ -112,11 +112,11 @@ public class Request {
     System.out.print("\"" + verb +" "+uri+" "+httpVersion + "\"");
     System.out.print(" "+code);
     if(code == 200){
-      writer.write(" "+size);
-      System.out.print(" "+size);
+     writer.write(" "+size);
+     System.out.print(" "+size);
     }else{
-      writer.write(" -");
-      System.out.print(" -");
+     writer.write(" -");
+     System.out.print(" -");
     }
     writer.newLine();
     writer.close();

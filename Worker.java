@@ -24,16 +24,12 @@ public class Worker extends Thread{
    request = new Request(client.getInputStream());
    resource = new Resource(request.getUriString(), httpdConf);
    response = responseFactory.getResponse(request,resource,mimeTypes);
-   /*
-   System.out.println("response: "+client);
    request.logRequest(httpdConf.logFile,response.code,response.size);
-   System.out.println("log: "+client);
    response.send(client.getOutputStream());
-   System.out.println("send: "+client);*/
    client.close();
   }catch(Exception e){
-    System.out.println("Error"+client);
-    e.printStackTrace();
+   System.out.println("Error"+client);
+   e.printStackTrace();
   }
  }
 }
